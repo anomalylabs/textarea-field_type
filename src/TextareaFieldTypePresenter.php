@@ -1,6 +1,7 @@
 <?php namespace Anomaly\TextareaFieldType;
 
 use Anomaly\Streams\Platform\Addon\FieldType\FieldTypePresenter;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 /**
@@ -47,7 +48,11 @@ class TextareaFieldTypePresenter extends FieldTypePresenter
      */
     public function yaml()
     {
-        return $this->yaml->parse($this->object->getValue());
+        try {
+            return $this->yaml->parse($this->object->getValue());
+        } catch (ParseException $e) {
+            return null;
+        }
     }
     
     /**
