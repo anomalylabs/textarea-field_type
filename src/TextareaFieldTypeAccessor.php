@@ -37,7 +37,7 @@ class TextareaFieldTypeAccessor extends FieldTypeAccessor
         }
 
         if ($this->fieldType->config('storage') == 'serialize') {
-            $value = unserialize($value);
+            $value = unserialize($value, ['allowed_classes' => false]);
         }
 
         return $value;
